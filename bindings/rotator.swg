@@ -97,6 +97,13 @@ typedef struct Rot {
 
 	ROTMETHOD2(set_conf, token_t, const_char_string)
 
+        const char *get_conf(token_t tok, char *name) {
+                static char s[128] = "";
+                strcpy(s, name);
+                self->error_status = rot_get_conf(self->rot, tok, s);
+                return s;
+        }
+
         const char *get_conf(token_t tok) {
                 static char s[128] = "";
                 self->error_status = rot_get_conf(self->rot, tok, s);
